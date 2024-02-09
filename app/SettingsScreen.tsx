@@ -1,10 +1,9 @@
 import { SafeAreaView, ScrollView, View } from "react-native";
 import { Stack } from "expo-router";
-import MainMenuComponent from "@/components/MainMenuComponent";
+import ProfileComponent from "@/components/SettingsComponent";
 import FooterComponent from "@/components/footerAndHeader/footer";
-import CountryHeaderComponent from "@/components/footerAndHeader/flagHeader";
 
-const MainScreen = () => {
+const SettingsComponent = () => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }}>
       <Stack.Screen
@@ -16,9 +15,8 @@ const MainScreen = () => {
       />
 
       <View style={{ flex: 1, justifyContent: 'space-between' }}>
-        <CountryHeaderComponent />
         <ScrollView showsVerticalScrollIndicator={false}>
-          <MainMenuComponent />
+          <ProfileComponent />
         </ScrollView>
         <FooterComponent />
       </View>
@@ -26,4 +24,4 @@ const MainScreen = () => {
   );
 };
 
-export default MainScreen;
+export default SettingsComponent;

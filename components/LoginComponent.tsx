@@ -1,31 +1,24 @@
 import { router } from "expo-router";
-import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
-import { getAuth, signInWithEmailAndPassword } from "@firebase/auth";
-import { initializeApp } from "@firebase/app";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyA2XTc8ySjBnw8I8g4dO8Rjpw-b2mPgPC8",
-  authDomain: "fitfinder-b3646.firebaseapp.com",
-  projectId: "fitfinder-b3646",
-  storageBucket: "fitfinder-b3646.appspot.com",
-  messagingSenderId: "839393205538",
-  appId: "1:839393205538:web:1b7e02eda67646f66cd97b",
-  measurementId: "G-3JPJGDX6MB"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+import React, { useState, useEffect } from "react";
+import { View, Text, TextInput, TouchableOpacity, Alert, Image } from "react-native";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "@firebase/auth";
+import { auth } from "@/firebaseConfig";
 
 const LoginComponent = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        router.push("/MainScreen");
+      }
+    });
+    return unsubscribe;
+  }, []);
+
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        Alert.alert("Login Success!");
-      })
       .catch((error) => {
         Alert.alert("Something went wrong.", error.message);
       });
@@ -40,6 +33,10 @@ const LoginComponent = () => {
         backgroundColor: "#000",
       }}
     >
+      <Image
+        source={require("../images/welcomeIcon.png")}
+        style={{ width: 250, height: 250 }}
+      />
       <Text
         style={{
           fontSize: 24,
@@ -55,28 +52,34 @@ const LoginComponent = () => {
       </Text>
       <TextInput
         placeholder="Username"
+        placeholderTextColor="#B1B1B1"
         style={{
-          backgroundColor: "#fff",
+          backgroundColor: "#2F2F2F",
           width: "80%",
           padding: 10,
           marginBottom: 10,
+          borderRadius: 25,
+          color: "#fff"
         }}
         onChangeText={setEmail}
       />
       <TextInput
         placeholder="Password"
+        placeholderTextColor="#B1B1B1"
         style={{
-          backgroundColor: "#fff",
+          backgroundColor: "#2F2F2F",
           width: "80%",
           padding: 10,
           marginBottom: 10,
+          borderRadius: 25,
+          color: "#fff"
         }}
         secureTextEntry={true}
         onChangeText={setPassword}
       />
       <TouchableOpacity
         style={{
-          backgroundColor: "yellow",
+          backgroundColor: "#E1F423",
           paddingVertical: 10,
           paddingHorizontal: 20,
           borderRadius: 5,
@@ -94,44 +97,7 @@ const LoginComponent = () => {
           marginBottom: 20,
         }}
       >
-        <Text style={{ color: "#fff" }}>Remember me</Text>
         <Text style={{ color: "#fff" }}>Forgot your password?</Text>
-      </View>
-      <Text style={{ color: "#fff", marginBottom: 10 }}>
-        or log in with your Gym
-      </Text>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          width: "80%",
-          marginBottom: 20,
-        }}
-      >
-        <TouchableOpacity
-          style={{
-            backgroundColor: "#4285F4",
-            paddingVertical: 10,
-            paddingHorizontal: 20,
-            borderRadius: 5,
-            flex: 1,
-            margin: 10,
-          }}
-        >
-          <Text style={{ textAlign: "center", color: "#fff" }}>Google</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "#3b5998",
-            paddingVertical: 10,
-            paddingHorizontal: 20,
-            borderRadius: 5,
-            flex: 1,
-            margin: 10,
-          }}
-        >
-          <Text style={{ textAlign: "center", color: "#fff" }}>Facebook</Text>
-        </TouchableOpacity>
       </View>
       <Text style={{ color: "#fff" }} onPress={() => router.push("/RegisterScreen")}>
         Don't have an account?{" "}

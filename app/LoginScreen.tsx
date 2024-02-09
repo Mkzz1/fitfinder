@@ -1,6 +1,8 @@
 import { SafeAreaView, ScrollView, View } from "react-native";
 import { Stack } from "expo-router";
 import LoginComponent from "@/components/LoginComponent";
+import GoogleButton from "@/components/signInButtons/google";
+import CountryHeaderComponent from "@/components/footerAndHeader/flagHeader";
 
 const LoginScreen = () => {
 
@@ -15,12 +17,14 @@ const LoginScreen = () => {
       />
 
       <ScrollView showsVerticalScrollIndicator={false}>
+        <CountryHeaderComponent />
         <View
           style={{
             flex: 1
           }}
         >
           <LoginComponent />
+          <GoogleButton />
         </View>
       </ScrollView>
     </SafeAreaView>
