@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const FooterComponent = () => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} >
+      <TouchableOpacity style={styles.button} onPress={() => router.push("/MainScreen")}>
         <Icon name="home" size={30} color="#fff" />
         <Text style={styles.text}>Home</Text>
       </TouchableOpacity>

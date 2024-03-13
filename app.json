@@ -16,15 +16,19 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mkzz.fitfinder"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.mkzz.fitfinder"
-    },
+      "package": "com.mkzz.fitfinder",
+      "googleMaps": {
+        "apiKey": "AIzaSyDBoFHF6U2K7FVjeilCajtpaqfQ5ufvfh0"
+      }
+      },
     "web": {
       "bundler": "metro",
       "output": "static",
@@ -38,7 +42,8 @@
     },
     "extra": {
       "router": {
-        "origin": false
+        "origin": false,
+        "googleMapsAndroidApiKey": "AIzaSyDBoFHF6U2K7FVjeilCajtpaqfQ5ufvfh0"
       },
       "eas": {
         "projectId": "73f3640e-4a7f-4972-aab1-48db969971a7"

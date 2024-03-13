@@ -1,4 +1,5 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { router } from 'expo-router';
 import { Stack, useRouter } from "expo-router";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -17,7 +18,7 @@ const MainMenuComponent = () => {
           <Text style={styles.sectionTitle}>Choose by Location</Text>
           <View style={styles.grid}>
             <TouchableOpacity style={styles.smallButton}>
-              <Text style={styles.buttonText}>Nearby Gyms</Text>
+              <Text style={styles.buttonText} onPress={() => router.push("/MapScreen")}>Nearby Gyms</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.smallButton}>
               <Text style={styles.buttonText}>Popular Gyms</Text>
